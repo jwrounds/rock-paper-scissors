@@ -6,21 +6,17 @@
 // either player or computer will be declared winner
 // win or lose message will alert the player to the computer's move and game result
 
-let playerMove = prompt('Rock, paper, or scissors?');
+let playerMove;
 let validChoice = false;
-
-
-if (playerMove.toLowerCase() === 'rock' || playerMove.toLowerCase() === 'paper' || playerMove.toLowerCase() === 'scissors') {
-    validChoice = true;
-}
 
 while (!validChoice) {
     playerMove = prompt('Please pick and type either rock, paper, or scissors, or hit \'esc\' to cancel.');
     if (playerMove === null) {
-        alert('Game cancelled');
         validChoice = true;
+        alert('Game cancelled');
     } else if (playerMove.toLowerCase() === 'rock' || playerMove.toLowerCase() === 'paper' || playerMove.toLowerCase() === 'scissors') {
         validChoice = true;
+        gameRound(playerMove, computerPlay());
     }
 }
 
@@ -56,5 +52,3 @@ function gameRound (playerSelection, computerSelection) {
         return alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
      }
 }
-
-gameRound(playerMove, computerPlay());
