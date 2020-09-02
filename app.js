@@ -12,32 +12,23 @@ const paperBtn = document.querySelector('#paper');
 const scissorsBtn = document.querySelector('#scissors');
 const moves = document.querySelectorAll('.rps');
 
+
 playBtn.addEventListener('click', (e) => {
-    for (let i = 0; i < moves.length; i++) {
-        moves[i].removeAttribute('hidden');
+    if (playBtn.textContent === 'Play') {
+        for (let i = 0; i < moves.length; i++) {
+            moves[i].toggleAttribute('hidden');
+        }
+        playBtn.textContent = 'Cancel';
+    } else if (playBtn.textContent === 'Cancel') {
+        for (let i = 0; i < moves.length; i++) {
+            moves[i].toggleAttribute('hidden');
+        }
+        playBtn.textContent = 'Play';        
     }
-    playBtn.setAttribute('hidden', 'true');
 });
 
-function game (rounds) {
-    +rounds;
+function playGame () {
 
-    for (let i = 0; i < rounds; i++) {
-    
-        let playerMove;
-        let validChoice = false;
-
-        while (!validChoice) {
-            playerMove = prompt('Please pick and type either rock, paper, or scissors, or hit \'esc\' to cancel.');
-            if (playerMove === null) {
-                validChoice = true;
-                alert('Game cancelled');
-            } else if (playerMove.toLowerCase() === 'rock' || playerMove.toLowerCase() === 'paper' || playerMove.toLowerCase() === 'scissors') {
-                validChoice = true;
-                gameRound(playerMove, computerPlay());
-            }
-        }
-    }
 }
 
 function computerPlay () {
@@ -47,7 +38,7 @@ function computerPlay () {
     return computerMove;
 }
 
-function gameRound (playerSelection, computerSelection) {
+function scoreGame (playerSelection, computerSelection) {
     playerSelection.toLowerCase();
     console.log(playerSelection, computerSelection);
      if (playerSelection === computerSelection) {
@@ -71,5 +62,5 @@ function gameRound (playerSelection, computerSelection) {
      } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
         return alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
      }
+    
 }
-
