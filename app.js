@@ -6,6 +6,18 @@
 // either player or computer will be declared winner
 // win or lose message will alert the player to the computer's move and game result
 
+const playBtn = document.querySelector('#play');
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+const moves = document.querySelectorAll('.rps');
+
+playBtn.addEventListener('click', (e) => {
+    for (let i = 0; i < moves.length; i++) {
+        moves[i].removeAttribute('hidden');
+    }
+    playBtn.setAttribute('hidden', 'true');
+});
 
 function game (rounds) {
     +rounds;
