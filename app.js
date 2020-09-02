@@ -20,15 +20,15 @@ playBtn.addEventListener('click', (e) => {
         }
         playBtn.textContent = 'Cancel';
     } else if (playBtn.textContent === 'Cancel') {
-        for (let i = 0; i < moves.length; i++) {
-            moves[i].toggleAttribute('hidden');
-        }
-        playBtn.textContent = 'Play';        
+        alert('Game cancelled');
+        resetGame();
     }
 });
 
-function playGame () {
-
+for (let i = 0; i < moves.length; i++) {
+    moves[i].addEventListener('click', (e) => {
+        scoreGame(e.target.id, computerPlay())
+    });
 }
 
 function computerPlay () {
@@ -42,25 +42,33 @@ function scoreGame (playerSelection, computerSelection) {
     playerSelection.toLowerCase();
     console.log(playerSelection, computerSelection);
      if (playerSelection === computerSelection) {
-         return alert(`${playerSelection} ties ${computerSelection}! No one loses! No one wins!`);
+        alert(`${playerSelection} ties ${computerSelection}! No one loses! No one wins!`);
 
      } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-         return alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+        alert(`You win! ${playerSelection} beats ${computerSelection}!`);
 
      } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        return alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+        alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
 
      } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        return alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+        alert(`You win! ${playerSelection} beats ${computerSelection}!`);
 
      } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-         return alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+        alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
 
      } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        return alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+        alert(`You win! ${playerSelection} beats ${computerSelection}!`);
 
      } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        return alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+        alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
      }
-    
+    resetGame();
+}
+
+function resetGame () {
+
+    for (let i = 0; i < moves.length; i++) {
+        moves[i].toggleAttribute('hidden');
+    }
+    playBtn.textContent = 'Play';        
 }
