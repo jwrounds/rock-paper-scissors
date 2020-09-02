@@ -3,8 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Rock, Paper, Scissors</title>
+    <style>
+        body {
+            display: grid;
+            height: 500px;
+            width: 100%;
+            grid-template-areas: 
+                "header header header"
+                ". play ."
+                "rock paper scissors";
+            grid-template-rows: auto;
+            grid-auto-columns: auto;
+        }
+        h1 {
+            justify-self: center;
+            grid-area: header
+        }
+        #play {
+            grid-area: play;
+            width: 25%;
+            height: 25%;
+            justify-self: center;
+        }
+        #rock {
+            grid-area: rock;
+        }
+        #paper {
+            grid-area: paper;
+        }
+        #scissors {
+            grid-area: scissors;
+        }
+        #rock, #paper, #scissors {
+            width: 50%;
+            height: 50%;
+            justify-self: center;
+        }
+    </style>
 </head>
 <body>
+    <h1>Rock, Paper, Scissors</h1>
+    <button id="play">Play</button>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
     <script src="app.js"></script>
 </body>
 </html>

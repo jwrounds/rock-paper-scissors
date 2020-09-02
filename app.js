@@ -61,9 +61,3 @@ function gameRound (playerSelection, computerSelection) {
      }
 }
 
-let gameNumber = prompt('How many rounds would you like to play?');
-if (gameNumber === null || isNaN(gameNumber)) {
-    alert('Game cancelled');
-} else {
-    game(gameNumber);
-}
