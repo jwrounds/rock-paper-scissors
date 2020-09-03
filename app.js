@@ -6,6 +6,7 @@
 // either player or computer will be declared winner
 // win or lose message will alert the player to the computer's move and game result
 
+const header = document.querySelector('h1');
 const playBtn = document.querySelector('#play');
 const rockBtn = document.querySelector('#rock');
 const paperBtn = document.querySelector('#paper');
@@ -25,63 +26,65 @@ playBtn.addEventListener('click', (e) => {
         playBtn.textContent = 'Cancel';
     } else if (playBtn.textContent === 'Cancel') {
         alert('Game cancelled');
+        header.textContent = 'Rock, Paper, Scissors';
         resetGame();
     }
 });
 
 for (let i = 0; i < moves.length; i++) {
     moves[i].addEventListener('click', (e) => {
-        playGame(e.target.id, computerPlay())
+        playGame(e.target.id.toUpperCase(), computerPlay())
     });
 }
 
 function computerPlay () {
-    let availableMoves = ['rock', 'paper', 'scissors'];
+    let availableMoves = ['ROCK', 'PAPER', 'SCISSORS'];
     let randomChoice = Math.floor(Math.random() * (3 - 1) + 1);
     let computerMove = availableMoves[randomChoice];
     return computerMove;
 }
 
 function playGame (playerSelection, computerSelection) {
-     if (playerSelection === computerSelection) {
-        alert(`${playerSelection} ties ${computerSelection}! No score!`);
 
-     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        alert(`${playerSelection} beats ${computerSelection}!`);
+    if (playerSelection === computerSelection) {
+        header.textContent = `${playerSelection} ties ${computerSelection}! No score!`;
+
+     } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') {
+        header.textContent = `${playerSelection} beats ${computerSelection}!`;
         pScore += 1;
         playerScoreDiv.textContent = pScore;
 
-     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        alert(`${computerSelection} beats ${playerSelection}!`);
+     } else if (playerSelection === 'ROCK' && computerSelection === 'paper') {
+        header.textContent = `${computerSelection} beats ${playerSelection}!`;
         cScore += 1;
         computerScoreDiv.textContent = cScore;
 
-     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        alert(`${playerSelection} beats ${computerSelection}!`);
+     } else if (playerSelection === 'PAPER' && computerSelection === 'ROCK') {
+        header.textContent = `${playerSelection} beats ${computerSelection}!`;
         pScore += 1;
         playerScoreDiv.textContent = pScore;
 
-     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        alert(`${computerSelection} beats ${playerSelection}!`);
+     } else if (playerSelection === 'PAPER' && computerSelection === 'SCISSORS') {
+        header.textContent = `${computerSelection} beats ${playerSelection}!`;
         cScore += 1;
         computerScoreDiv.textContent = cScore;
 
-     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        alert(`${playerSelection} beats ${computerSelection}!`);
+     } else if (playerSelection === 'SCISSORS' && computerSelection === 'PAPER') {
+        header.textContent = `${playerSelection} beats ${computerSelection}!`;
         pScore += 1;
         playerScoreDiv.textContent = pScore;
 
-     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        alert(`${computerSelection} beats ${playerSelection}!`);
+     } else if (playerSelection === 'SCISSORS' && computerSelection === 'ROCK') {
+        header.textContent = `${computerSelection} beats ${playerSelection}!`;
         cScore += 1;
         computerScoreDiv.textContent = cScore;
      }
 
      if (cScore === 5) {
-        alert('Computer wins!')
+        header.textContent = 'Computer wins!';
         resetGame();
      } else if (pScore === 5) {
-        alert('Player wins!');
+        header.textContent = 'Player wins!';
         resetGame();
      }
 
@@ -92,6 +95,7 @@ function resetGame () {
     for (let i = 0; i < moves.length; i++) {
         moves[i].toggleAttribute('hidden');
     }
+    
     playBtn.textContent = 'Play';
     playerScoreDiv.textContent = '0';
     computerScoreDiv.textContent = '0';
