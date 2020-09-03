@@ -10,6 +10,8 @@
             width: 100%;
             grid-template-areas: 
                 "header header header"
+                "player-score . computer-score"
+                "player-score-value . computer-score-value"
                 ". play ."
                 "rock paper scissors";
             grid-template-rows: auto;
@@ -24,6 +26,23 @@
             width: 25%;
             height: 25%;
             justify-self: center;
+        }
+        #player-score {
+            grid-area: player-score;
+            width: 19%;
+            height: 25%;
+            justify-self: right;
+        }
+        #player-score .score {
+            grid-area: player-score-value;
+        }
+        #computer-score {
+            grid-area: computer-score;
+            width: 22%;
+            height: 25%;
+        }
+        #computer-score .score {
+            grid-area: computer-score-value;
         }
         #rock {
             grid-area: rock;
@@ -43,6 +62,12 @@
 </head>
 <body>
     <h1>Rock, Paper, Scissors</h1>
+    <div id="player-score">Player score:
+        <div class="score">0</div>
+    </div>
+    <div id="computer-score">Computer score:
+        <div class="score">0</div>
+    </div>
     <button id="play">Play</button>
     <button id="rock" class="rps" hidden>Rock</button>
     <button id="paper" class="rps" hidden>Paper</button>

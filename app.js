@@ -11,6 +11,10 @@ const rockBtn = document.querySelector('#rock');
 const paperBtn = document.querySelector('#paper');
 const scissorsBtn = document.querySelector('#scissors');
 const moves = document.querySelectorAll('.rps');
+const playerScoreDiv = document.querySelector('#player-score .score');
+const computerScoreDiv = document.querySelector('#computer-score .score');
+let pScore = 0;
+let cScore = 0;
 
 
 playBtn.addEventListener('click', (e) => {
@@ -27,7 +31,7 @@ playBtn.addEventListener('click', (e) => {
 
 for (let i = 0; i < moves.length; i++) {
     moves[i].addEventListener('click', (e) => {
-        scoreGame(e.target.id, computerPlay())
+        playGame(e.target.id, computerPlay())
     });
 }
 
@@ -38,31 +42,49 @@ function computerPlay () {
     return computerMove;
 }
 
-function scoreGame (playerSelection, computerSelection) {
-    playerSelection.toLowerCase();
-    console.log(playerSelection, computerSelection);
+function playGame (playerSelection, computerSelection) {
      if (playerSelection === computerSelection) {
-        alert(`${playerSelection} ties ${computerSelection}! No one loses! No one wins!`);
+        alert(`${playerSelection} ties ${computerSelection}! No score!`);
 
      } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+        alert(`${playerSelection} beats ${computerSelection}!`);
+        pScore += 1;
+        playerScoreDiv.textContent = pScore;
 
      } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+        alert(`${computerSelection} beats ${playerSelection}!`);
+        cScore += 1;
+        computerScoreDiv.textContent = cScore;
 
      } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+        alert(`${playerSelection} beats ${computerSelection}!`);
+        pScore += 1;
+        playerScoreDiv.textContent = pScore;
 
      } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+        alert(`${computerSelection} beats ${playerSelection}!`);
+        cScore += 1;
+        computerScoreDiv.textContent = cScore;
 
      } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+        alert(`${playerSelection} beats ${computerSelection}!`);
+        pScore += 1;
+        playerScoreDiv.textContent = pScore;
 
      } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+        alert(`${computerSelection} beats ${playerSelection}!`);
+        cScore += 1;
+        computerScoreDiv.textContent = cScore;
      }
-    resetGame();
+
+     if (cScore === 5) {
+        alert('Computer wins!')
+        resetGame();
+     } else if (pScore === 5) {
+        alert('Player wins!');
+        resetGame();
+     }
+
 }
 
 function resetGame () {
@@ -70,5 +92,9 @@ function resetGame () {
     for (let i = 0; i < moves.length; i++) {
         moves[i].toggleAttribute('hidden');
     }
-    playBtn.textContent = 'Play';        
+    playBtn.textContent = 'Play';
+    playerScoreDiv.textContent = '0';
+    computerScoreDiv.textContent = '0';
+    cScore = 0;
+    pScore = 0;        
 }
